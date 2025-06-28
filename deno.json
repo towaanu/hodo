@@ -1,14 +1,18 @@
 {
   "imports": {
-    "hono": "jsr:@hono/hono@^4.8.3",
+    "@/": "./src/",
+    "@hono/zod-validator": "npm:@hono/zod-validator@^0.7.0",
+    "bcrypt": "npm:bcrypt@^6.0.0",
+    "hono": "npm:hono@^4.8.3",
     "kysely": "npm:kysely@^0.28.1",
     "kysely-ctl": "npm:kysely-ctl@^0.13.1",
     "kysely-codegen": "npm:kysely-codegen",
     "pg": "npm:pg",
-    "pg-pool": "npm:pg-pool"
+    "pg-pool": "npm:pg-pool",
+    "zod": "npm:zod@^3.25.67"
   },
   "tasks": {
-    "start": "deno run --env-file --allow-env --allow-net ./src/main.ts",
+    "start": "deno run --env-file --allow-read --allow-ffi --allow-env --allow-net ./src/main.ts",
     "kysely-codegen": "deno run -A npm:kysely-codegen --singularize --out-file ./src/db/models.ts"
   },
   "compilerOptions": {

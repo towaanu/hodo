@@ -1,22 +1,17 @@
 import { Hono } from "hono";
-import { Insertable } from "kysely";
-import { User } from "../db/models.ts";
-import { db } from "../db/index.ts";
 import { HTTPException } from "hono/http-exception";
+import { NewUserSchema } from "@/models/user.ts";
+import { zValidatorWrapper } from "@/validators/zod.ts";
+import { Bindings } from "@/common/types.ts";
+import { registerUser } from "@/models/user.ts";
 
-const routes = new Hono();
+const routes = new Hono<{ Bindings: Bindings }>();
 
-routes.post("/", async (c) => {
-  const newUser = await c.req.json<Insertable<User>>();
+routes.post("/", zValidatorWrapper("json", NewUserSchema), async (c) => {
+  const newUser = c.req.valid("json");
   try {
-    const res = await db.insertInto("users").values(newUser).returning(["id"])
-      .executeTakeFirst();
-
-    if (!res) {
-      throw new Error("No id returned");
-    }
-
-    return c.json({ id: res.id });
+    const user = await registerUser(newUser);
+    return c.json({ user });
   } catch (e) {
     console.error(e);
     throw new HTTPException(400, { message: "Unable to register new user" });

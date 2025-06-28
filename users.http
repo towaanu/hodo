@@ -4,6 +4,6 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "email": "toto6@towaanu.com",
+  "email": "toto19@towaanu.com",
   "password": "secret"
 }
