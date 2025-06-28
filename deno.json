@@ -8,8 +8,8 @@
     "pg-pool": "npm:pg-pool"
   },
   "tasks": {
-    "start": "deno run --env-file --allow-env --allow-net main.ts",
-    "kysely-codegen": "deno run -A npm:kysely-codegen --singularize --out-file ./db/db.d.ts"
+    "start": "deno run --env-file --allow-env --allow-net ./src/main.ts",
+    "kysely-codegen": "deno run -A npm:kysely-codegen --singularize --out-file ./src/db/models.ts"
   },
   "compilerOptions": {
     "jsx": "precompile",

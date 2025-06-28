@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { Insertable } from "kysely";
-import { User } from "../db/db.d.ts";
+import { User } from "../db/models.ts";
 import { db } from "../db/index.ts";
 import { HTTPException } from "hono/http-exception";
 
