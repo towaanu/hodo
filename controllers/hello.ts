@@ -1,14 +1,14 @@
-import { Hono } from 'hono'
+import { Hono } from "hono";
 
-const routes = new Hono()
+const routes = new Hono();
 
-routes.get('/', (c) => {
-  return c.text('Hello Hono!')
-})
+routes.get("/", (c) => {
+  return c.text("Hello Hono!");
+});
 
-routes.get('/:name', (c) => {
+routes.get("/:name", (c) => {
   const name = c.req.param("name");
-  return c.text(`Hello ${name}!`)
-})
+  return c.text(`Hello ${name}!`);
+});
 
 export default routes;

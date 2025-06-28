@@ -1,0 +1,2 @@
+deno run -A npm:kysely-ctl
+deno run -A npm:kysely-codegen
