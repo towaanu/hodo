@@ -7,6 +7,7 @@
     "npm:kysely-codegen@*": "0.18.5_kysely@0.28.2_pg@8.16.2",
     "npm:kysely-ctl@~0.13.1": "0.13.1_kysely@0.28.2",
     "npm:kysely@~0.28.1": "0.28.2",
+    "npm:neverthrow@^8.2.0": "8.2.0",
     "npm:pg-pool@*": "3.10.1_pg@8.16.2",
     "npm:pg@*": "8.16.2",
     "npm:prisma@latest": "6.10.1",
@@ -66,6 +67,11 @@
       "dependencies": [
         "@prisma/debug"
       ]
+    },
+    "@rollup/rollup-linux-x64-gnu@4.44.1": {
+      "integrity": "sha512-EtnsrmZGomz9WxK1bR5079zee3+7a+AdFlghyd6VbAjgRJDbTANJ9dcPIPAi76uG05micpEL+gPGmAKYTschQw==",
+      "os": ["linux"],
+      "cpu": ["x64"]
     },
     "ansi-styles@3.2.1": {
       "integrity": "sha512-VT0ZI6kZRdTh8YyJw3SMbYm/u+NqfsAxEpWO0Pf9sq8/e94WxxOpPKx9FR1FlyCtOVDNOQ+8ntlqFxiRc+r5qA==",
@@ -394,6 +400,12 @@
     "minimist@1.2.8": {
       "integrity": "sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA=="
     },
+    "neverthrow@8.2.0": {
+      "integrity": "sha512-kOCT/1MCPAxY5iUV3wytNFUMUolzuwd/VF/1KCx7kf6CutrOsTie+84zTGTpgQycjvfLdBBdvBvFLqFD2c0wkQ==",
+      "optionalDependencies": [
+        "@rollup/rollup-linux-x64-gnu"
+      ]
+    },
     "node-addon-api@8.4.0": {
       "integrity": "sha512-D9DI/gXHvVmjHS08SVch0Em8G5S1P+QWtU31appcKT/8wFSPRcdHadIFSAntdMMVM5zz+/DL+bL/gz3UDppqtg=="
     },
@@ -638,6 +650,7 @@
       "npm:kysely-codegen@*",
       "npm:kysely-ctl@~0.13.1",
       "npm:kysely@~0.28.1",
+      "npm:neverthrow@^8.2.0",
       "npm:pg-pool@*",
       "npm:pg@*",
       "npm:zod@^3.25.67"

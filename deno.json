@@ -7,6 +7,7 @@
     "kysely": "npm:kysely@^0.28.1",
     "kysely-ctl": "npm:kysely-ctl@^0.13.1",
     "kysely-codegen": "npm:kysely-codegen",
+    "neverthrow": "npm:neverthrow@^8.2.0",
     "pg": "npm:pg",
     "pg-pool": "npm:pg-pool",
     "zod": "npm:zod@^3.25.67"
