@@ -1,5 +1,5 @@
 import { Kysely, PostgresDialect } from "kysely";
-import type { DB } from "./db.d.ts";
+import type { DB } from "./models.ts";
 import { Pool } from "pg";
 
 export type HodoKysely = Kysely<DB>;

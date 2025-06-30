@@ -2,14 +2,14 @@ export enum AppErrorKind {
   DbError,
   ModelNotFound,
   Bcrypt,
-  Zod,
+  Valibot,
 }
 
 export type AppError =
   | { kind: AppErrorKind.DbError; message?: string }
   | { kind: AppErrorKind.ModelNotFound; message?: string }
   | { kind: AppErrorKind.Bcrypt; message?: string }
-  | { kind: AppErrorKind.Zod; messages: Array<string> };
+  | { kind: AppErrorKind.Valibot; messages: Array<string> };
 
 export function appErrorToResponse(appError: AppError): Response {
   switch (appError.kind) {
@@ -22,7 +22,7 @@ export function appErrorToResponse(appError: AppError): Response {
     case AppErrorKind.Bcrypt:
       return new Response("Server error", { status: 500 });
 
-    case AppErrorKind.Zod:
+    case AppErrorKind.Valibot:
       return new Response("Wrong item", { status: 400 });
 
     default:

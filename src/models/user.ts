@@ -1,16 +1,16 @@
-import * as z from "zod/v4";
+import * as v from "valibot";
 import { Insertable, Selectable } from "kysely";
 import { User } from "@/db/models.ts";
 import { db } from "@/db/index.ts";
 import { Err } from "neverthrow";
 import { AppErrorKind } from "@/common/error.ts";
 import type { AppResult, AppResultAsync } from "@/common/types.ts";
-import { parseResult } from "@/common/zod.ts";
+import { parseResult } from "@/common/valibot.ts";
 import { hashPassword } from "@/common/password.ts";
 
-export const NewUserSchema = z.object({
-  email: z.email(),
-  password: z.string().min(5),
+export const NewUserSchema = v.object({
+  email: v.pipe(v.string(), v.email()),
+  password: v.pipe(v.string(), v.minLength(5)),
 });
 
 function insertUser(newUser: Insertable<User>): AppResultAsync<number> {

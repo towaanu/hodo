@@ -9,6 +9,7 @@ export type Bindings = {
   DATABASE_USER: string;
   DATABASE_PASSWORD: string;
   DATABASE_POOL_MAX?: number;
+  SERVER_BASE_URL: string
 };
 
 export type AppResultAsync<T> = ResultAsync<T, AppError>;
