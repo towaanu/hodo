@@ -4,6 +4,7 @@ import { zValidatorWrapper } from "@/common/zod.ts";
 import { Bindings } from "@/common/types.ts";
 import { registerUser } from "@/models/user.ts";
 import { appErrorToResponse } from "@/common/error.ts";
+import { toUserResponse } from "@/views/user.ts";
 
 const routes = new Hono<{ Bindings: Bindings }>();
 
@@ -17,14 +18,14 @@ const routes = new Hono<{ Bindings: Bindings }>();
 //     throw new HTTPException(400, { message: "Unable to register new user" });
 //   }
 // });
-
+//
 routes.post("/", zValidatorWrapper("json", NewUserSchema), async (c) => {
   const newUser = c.req.valid("json");
   const user = await registerUser(newUser);
   if (user.isErr()) {
     return appErrorToResponse(user.error);
   } else {
-    return c.json(user.value);
+    return c.json(toUserResponse(user.value));
   }
 });
 
