@@ -1,5 +1,5 @@
 import * as v from "valibot";
-import { DeleteResult, Insertable, Selectable } from "kysely";
+import { DeleteResult, Insertable, Selectable, Updateable } from "kysely";
 import { Todo } from "@/db/models.ts";
 import { db } from "@/db/index.ts";
 import { Err, errAsync } from "neverthrow";
@@ -58,6 +58,28 @@ export function findTodosByUserId(
     .toAsyncResult((_err) => ({ kind: AppErrorKind.DbError }));
 }
 
+export async function updateTodoForUser(
+  todoId: number,
+  todo: Updateable<Todo>,
+  userId: string,
+): Promise<AppResult<Selectable<Todo>>> {
+  const updateRes = await db.updateTable("todos")
+    .set(todo)
+    .where((eb) =>
+      eb.and({
+        id: todoId,
+        userId,
+      })
+    ).executeTakeFirstOrThrow()
+    .toAsyncResult((_err) => ({ kind: AppErrorKind.DbError }));
+
+  if (updateRes.isErr()) {
+    return new Err(updateRes.error);
+  }
+
+  return findTodoById(todoId);
+}
+
 export function deleteTodoForUser(
   id: number,
   userId: string,
@@ -71,7 +93,7 @@ export function deleteTodoForUser(
     .toAsyncResult((_err) => ({ kind: AppErrorKind.DbError }));
 }
 
-export function insertNewTodoAndGetUser(
+export function insertNewTodoAndGetTodo(
   newTodo: Insertable<Todo>,
 ): AppResultAsync<Selectable<Todo>> {
   return insertTodo(newTodo)

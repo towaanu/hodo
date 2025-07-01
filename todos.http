@@ -1,0 +1,69 @@
+###
+POST http://localhost:8000/api/auth/sign-up/email
+Accept: application/json
+Content-Type: application/json
+
+{
+  "email": "user@towaanu.com",
+  "password": "secret55555",
+  "name": "user"
+}
+
+### Signin
+POST http://localhost:8000/api/auth/sign-in/email
+Accept: application/json
+Content-Type: application/json
+
+{
+  "email": "user@towaanu.com",
+  "password": "secret55555"
+}
+> {%
+  -- lua
+  -- save the new set authenticated session
+  client.global.session = response.cookies["better-auth.session_token"].value
+%}
+
+### CreateTodo
+run #Signin
+
+POST http://localhost:8000/api/todos
+Accept: application/json
+Content-Type: application/json
+Cookie: better-auth.session_token={{session}}
+
+{
+  "title": "Cook"
+}
+
+### CreateSecondTodo
+run #Signin
+
+POST http://localhost:8000/api/todos
+Accept: application/json
+Content-Type: application/json
+Cookie: better-auth.session_token={{session}}
+
+{
+  "title": "Go to the swimming pool"
+}
+
+### Get Todos
+run #Signin
+
+GET http://localhost:8000/api/todos
+Accept: application/json
+Content-Type: application/json
+Cookie: better-auth.session_token={{session}}
+
+### Update Todo
+run #Signin
+
+PUT http://localhost:8000/api/todos/1
+Accept: application/json
+Content-Type: application/json
+Cookie: better-auth.session_token={{session}}
+
+{
+    "isDone": true
+}

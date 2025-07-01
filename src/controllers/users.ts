@@ -2,7 +2,7 @@ import { Hono } from "hono";
 import { Bindings } from "@/common/types.ts";
 import { toUserResponse, userResponseSchema } from "@/views/user.ts";
 import { describeRoute } from "hono-openapi";
-import { resolver, validator as vValidator } from "hono-openapi/valibot";
+import { resolver } from "hono-openapi/valibot";
 import { authRequired } from "@/middlewares/auth.ts";
 import { AuthType } from "@/common/auth.ts";
 

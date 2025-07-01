@@ -14,7 +14,8 @@
     "neverthrow": "npm:neverthrow@^8.2.0",
     "pg": "npm:pg",
     "pg-pool": "npm:pg-pool",
-    "valibot": "npm:valibot@^1.1.0",
+    "snakecase-keys": "npm:snakecase-keys@^8.0.1",
+    "valibot": "npm:valibot@^1.1.0"
   },
   "tasks": {
     "start": "deno run --env-file --allow-read --allow-ffi --allow-env --allow-net ./src/main.ts",

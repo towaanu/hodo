@@ -3,6 +3,7 @@ import { cors } from "hono/cors";
 import helloRoutes from "@/controllers/hello.ts";
 import usersRoutes from "@/controllers/users.ts";
 import authRoutes from "@/controllers/auth.ts";
+import todosRoutes from "@/controllers/todos.ts";
 import { Bindings } from "@/common/types.ts";
 import { openAPISpecs } from "hono-openapi";
 import "@/common/promise.ts";
@@ -41,6 +42,7 @@ app.get(
 app
   .route("/hello", helloRoutes)
   .route("/api/users", usersRoutes)
-  .route("/api/auth", authRoutes);
+  .route("/api/auth", authRoutes)
+  .route("/api/todos", todosRoutes);
 
 Deno.serve(app.fetch);

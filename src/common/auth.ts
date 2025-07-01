@@ -19,7 +19,7 @@ export const auth = betterAuth({
       emailVerified: "email_verified",
       createdAt: "created_at",
       updatedAt: "updated_at",
-    }
+    },
   },
   session: {
     fields: {
@@ -29,7 +29,7 @@ export const auth = betterAuth({
       userAgent: "user_agent",
       createdAt: "created_at",
       updatedAt: "updated_at",
-    }
+    },
   },
   account: {
     fields: {
@@ -43,14 +43,14 @@ export const auth = betterAuth({
       idToken: "id_token",
       createdAt: "created_at",
       updatedAt: "updated_at",
-    }
+    },
   },
   verification: {
     fields: {
       expiresAt: "expires_at",
       createdAt: "created_at",
       updatedAt: "updated_at",
-    }
+    },
   },
 });
 
