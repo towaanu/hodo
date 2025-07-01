@@ -4,17 +4,29 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "email": "toto88@towaanu.com",
+  "email": "hello@towaanu.com",
   "password": "secret55555",
-  "name": "toto"
+  "name": "hello"
 }
 
-###
+### Signin
 POST http://localhost:8000/api/auth/sign-in/email
 Accept: application/json
 Content-Type: application/json
 
 {
-  "email": "toto@towaanu.com",
+  "email": "hello@towaanu.com",
   "password": "secret55555"
 }
+> {%
+  -- lua
+  -- save the new set authenticated session
+  client.global.session = response.cookies["better-auth.session_token"].value
+%}
+
+### Me
+run #Signin
+
+GET http://localhost:8000/api/users/me
+Accept: application/json
+Cookie: better-auth.session_token={{session}}

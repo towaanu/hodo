@@ -38,6 +38,16 @@ export interface Session {
   userId: string;
 }
 
+export interface Todo {
+  createdAt: Generated<Timestamp>;
+  description: string | null;
+  id: Generated<number>;
+  isDone: Generated<boolean>;
+  title: string;
+  updatedAt: Generated<Timestamp>;
+  userId: string;
+}
+
 export interface User {
   createdAt: Generated<Timestamp>;
   email: string;
@@ -60,6 +70,7 @@ export interface Verification {
 export interface DB {
   account: Account;
   session: Session;
+  todos: Todo;
   users: User;
   verification: Verification;
 }

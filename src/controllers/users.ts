@@ -1,18 +1,17 @@
 import { Hono } from "hono";
-import { NewUserSchema } from "@/models/user.ts";
 import { Bindings } from "@/common/types.ts";
-import { registerUser } from "@/models/user.ts";
-import { appErrorToResponse } from "@/common/error.ts";
 import { toUserResponse, userResponseSchema } from "@/views/user.ts";
 import { describeRoute } from "hono-openapi";
 import { resolver, validator as vValidator } from "hono-openapi/valibot";
+import { authRequired } from "@/middlewares/auth.ts";
+import { AuthType } from "@/common/auth.ts";
 
-const routes = new Hono<{ Bindings: Bindings }>();
+const routes = new Hono<{ Bindings: Bindings; Variables: AuthType }>();
 
-routes.post(
-  "/",
+routes.get(
+  "/me",
   describeRoute({
-    description: "Register a new user",
+    description: "Returns info of the current user or error if not logged in",
     responses: {
       200: {
         description: "Successful response",
@@ -20,17 +19,19 @@ routes.post(
           "application/json": { schema: resolver(userResponseSchema) },
         },
       },
+      401: {
+        description: "Unauthorized response",
+      },
     },
   }),
-  vValidator("json", NewUserSchema),
-  async (c) => {
-    const newUser = c.req.valid("json");
-    const user = await registerUser(newUser);
-    if (user.isErr()) {
-      return appErrorToResponse(user.error);
-    } else {
-      return c.json(toUserResponse(user.value));
+  authRequired,
+  (c) => {
+    // const session = c.get("session");
+    const user = c.get("user");
+    if (!user) {
+      return new Response("Server error", { status: 500 });
     }
+    return c.json(toUserResponse(user));
   },
 );
 

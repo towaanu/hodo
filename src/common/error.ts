@@ -3,12 +3,14 @@ export enum AppErrorKind {
   ModelNotFound,
   Bcrypt,
   Valibot,
+  Unauthorized
 }
 
 export type AppError =
   | { kind: AppErrorKind.DbError; message?: string }
   | { kind: AppErrorKind.ModelNotFound; message?: string }
   | { kind: AppErrorKind.Bcrypt; message?: string }
+  | { kind: AppErrorKind.Unauthorized; message?: string }
   | { kind: AppErrorKind.Valibot; messages: Array<string> };
 
 export function appErrorToResponse(appError: AppError): Response {
@@ -24,6 +26,9 @@ export function appErrorToResponse(appError: AppError): Response {
 
     case AppErrorKind.Valibot:
       return new Response("Wrong item", { status: 400 });
+
+    case AppErrorKind.Unauthorized:
+      return new Response("Unauthorized", { status: 401 });
 
     default:
       return new Response("Server error", { status: 500 });
