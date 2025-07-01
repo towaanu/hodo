@@ -1,5 +1,5 @@
 import type { Result, ResultAsync } from "neverthrow";
-import type {AppError} from "@/common/error.ts";
+import type { AppError } from "@/common/error.ts";
 
 export type Bindings = {
   DATABASE_URL: string;
@@ -9,7 +9,9 @@ export type Bindings = {
   DATABASE_USER: string;
   DATABASE_PASSWORD: string;
   DATABASE_POOL_MAX?: number;
-  SERVER_BASE_URL: string
+  SERVER_BASE_URL: string;
+  BETTER_AUTH_SECRET: string;
+  BETTER_AUTH_URL: string;
 };
 
 export type AppResultAsync<T> = ResultAsync<T, AppError>;

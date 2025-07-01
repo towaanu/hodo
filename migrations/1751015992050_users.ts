@@ -8,9 +8,8 @@ export async function up(db: Kysely<any>): Promise<void> {
   // For more info, see: https://kysely.dev/docs/migrations
   await db.schema
     .createTable("users")
-    .addColumn("id", "serial", (col) => col.primaryKey())
+    .addColumn("id", "varchar", (col) => col.primaryKey())
     .addColumn("email", "varchar", (col) => col.notNull().unique())
-    .addColumn("password", "varchar", (col) => col.notNull())
     .addColumn(
       "created_at",
       "timestamp",

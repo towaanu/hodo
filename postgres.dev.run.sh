@@ -5,5 +5,5 @@ podman run \
   -e POSTGRES_DB=hodo \
   -e POSTGRES_USER=hodo \
   -e POSTGRES_PASSWORD=secret \
-  -d postgres
-
+  -d postgres \
+  -c log_statement=all

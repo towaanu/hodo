@@ -1,14 +1,17 @@
 import { Hono } from "hono";
-import { cors } from 'hono/cors'
+import { cors } from "hono/cors";
 import helloRoutes from "@/controllers/hello.ts";
 import usersRoutes from "@/controllers/users.ts";
+import authRoutes from "@/controllers/auth.ts";
 import { Bindings } from "@/common/types.ts";
 import { openAPISpecs } from "hono-openapi";
 import "@/common/promise.ts";
 import { Scalar } from "@scalar/hono-api-reference";
+import { logger } from "hono/logger";
 
 const app = new Hono<{ Bindings: Bindings }>();
-app.use('/api/*', cors());
+app.use("/api/*", cors());
+app.use(logger());
 
 app.get(
   "/openapi",
@@ -37,6 +40,7 @@ app.get(
 
 app
   .route("/hello", helloRoutes)
-  .route("/api/users", usersRoutes);
+  .route("/api/users", usersRoutes)
+  .route("/api/auth", authRoutes);
 
 Deno.serve(app.fetch);

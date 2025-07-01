@@ -1,9 +1,20 @@
 ###
-POST http://localhost:8000/api/users
+POST http://localhost:8000/api/auth/sign-up/email
 Accept: application/json
 Content-Type: application/json
 
 {
-  "email": "toto22@towaanu.com",
-  "password": "secret"
+  "email": "toto88@towaanu.com",
+  "password": "secret55555",
+  "name": "toto"
+}
+
+###
+POST http://localhost:8000/api/auth/sign-in/email
+Accept: application/json
+Content-Type: application/json
+
+{
+  "email": "toto@towaanu.com",
+  "password": "secret55555"
 }
